@@ -29,6 +29,6 @@ Zshort = Zsho;
 AbGL = (SWR-1)/(SWR+1) 
 PhGL = 4*pi*(Zshort - Zmin)/lambda + pi
 
-%% 1.4
+%% Q1.4
 GammaL = AbGL*exp(j*PhGL)
 Z_L = Rc*(1+GammaL)/(1-GammaL)
