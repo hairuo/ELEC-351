@@ -25,8 +25,9 @@ Y2 = G2+j*omega*C2;
 Z2 = 1/Y2
 
 %% R3 || C3
-% clear, clc, close all
+clear, clc, close all
 f = 750e6;
+Zc = 50;
 omega = 2*pi*f;
 R3 = 10;
 C3 = 5e-12;
@@ -79,3 +80,9 @@ fprintf('C = %.4e pF\n', C);
 % Optional: show the reconstructed impedance for verification
 Z_check = 1 / (1/R + 1j * omega * C);
 fprintf('\nCheck: Reconstructed Z = %.4f + j%.4f ohms\n', real(Z_check), imag(Z_check));
+%%
+clear,clc,close all
+ZL = 55.6 - j*282
+Zc = 50
+Gamma = (ZL-Zc)/(ZL+Zc)
+absGamma = abs(Gamma)
