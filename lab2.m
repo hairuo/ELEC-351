@@ -29,7 +29,7 @@ ZL = 50*(1+GammaL)/(1-GammaL)
 clear, clc
 Z0 = 50;
 % ZL = [44.732 + 118.95*i; 4.9108-19.4569*i]
-ZL = []
+ZL = [9.46-j*6.16; 184+j*12.2; 17.695-j*33.73]
 GammaL = (ZL - Z0)./(ZL + Z0)
 absGammaL = abs(GammaL)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -175,7 +175,7 @@ omega = 2*pi*f;
 c = 3e8;
 beta = omega/c;
 Z = [115.5:20:355.5]*1e-3
-L = 538*1e-3;
+L = 525*1e-3
 VdB = 20*log10(abs(1+exp(j*(pi-2*beta*(L-Z))))/2)
 plot(Z, VdB)
 %% Calculate using (15), Deborah,
@@ -204,9 +204,30 @@ Gamma = absG*exp(j*Phi)
 ZL = 50*(1+Gamma)/(1-Gamma) %296.11+49.93*j
 %%
 clear, clc, clf, close all
-zsh = 330.4e-3;
-zmin = 209e-3;
+zsh = 333.7e-3;
+zmin = 215.5e-3;
 c = 3e8;
-f = 760e6;
-lambda = 394.2e-3
+f = 770e6;
+omega = 2*pi*f;
+lambda = c/f;
 phi = 4*pi*(zsh-zmin)/lambda + pi
+phi_degree = phi*180/pi-360
+SWRdB = 13;%dB
+SWR = 10^(SWRdB/20)
+absGamma = (SWR-1)/(SWR+1)
+Gamma = absGamma*exp(j*phi);
+ZL = 50*(1+Gamma)/(1-Gamma)
+R = 82; 
+C0 = 10e-12;
+Y = 1/R+j*omega*C0;
+ZL0 = 1/Y
+Gamma0 = (50-ZL0)/(50+ZL0)
+abs(Gamma0)
+%%
+dBValue = [-45.5; -23]
+LValue = 10.^(dBValue/20)
+%%
+clear, clc
+SWRdB = 7.25;%dB
+SWR = 10^(SWRdB/20)
+absGamma = (SWR-1)/(SWR+1)
