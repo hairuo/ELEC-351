@@ -86,3 +86,17 @@ ZL = 55.6 - j*282
 Zc = 50
 Gamma = (ZL-Zc)/(ZL+Zc)
 absGamma = abs(Gamma)
+
+%%
+%openExample('rf/PlotImpedanceDataOnASmithPlotExample')
+clear,clc,close all
+% z1 = 0.1*50 + 1j*(0:2:50);
+z1 = [5+j*0; 5+j*2; 5+j*3]
+% z2 = (0:2:50) - 0.6*50j;
+z0 = 50;
+gamma1 = z2gamma(z1,z0);
+% gamma2 = z2gamma(z2,z0);
+s = smithplot(gamma1,'Color',[0.2 0 1],'GridType',"Z");
+hold on;
+% s = smithplot(gamma2,'Color','g','LineStyle','-.','LineWidth',1);
+s.Marker = {'+','s'}
