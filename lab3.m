@@ -1,5 +1,5 @@
 % 2025-10-16 For different R||C load, calculate ZL values
-%% R1 || C1
+%% R1=24 Ohm || C1 = 10 pF
 clear, clc, close all
 f = 750e6;
 omega = 2*pi*f;
@@ -13,8 +13,8 @@ Zm1 = 7.12 + j*66.1;
 absGamma1 = abs((Z1-Zc)/(Z1+Zc))
 absGamma_m1 = abs((Zm1-Zc)/(Zm1 + Zc))
 
-%% R2 || C2
-%clear, clc, close all
+%% R2 =  82 Ohm || C2 = 10 pF
+clear, clc, close all
 f = 750e6;
 omega = 2*pi*f;
 Zc = 50;
@@ -24,9 +24,9 @@ G2 = 1/R2;
 Y2 = G2+j*omega*C2;
 Z2 = 1/Y2
 
-%% R3 || C3
+%% R3 = 10 Ohm || C3 = 5 pF
 clear, clc, close all
-f = 750e6;
+f = 754e6;
 Zc = 50;
 omega = 2*pi*f;
 R3 = 10;
@@ -34,13 +34,14 @@ C3 = 5e-12;
 G3 = 1/R3;
 Y3 = G3+j*omega*C3;
 Z3 = 1/Y3
-Zm3 = 317 + j*736
+Zm3 = 76 + j*361
 Gamma_m3 = 0.95
 absGamma3 = abs((Z3-Zc)/(Z3+Zc))
 absGamma_m3 = abs((Zm3-Zc)/(Zm3 + Zc))
+RL = 20*log10(Gamma_m3)
 
 %% R4 || C4
-% clear, clc, close all
+clear, clc, close all
 f = 750e6;
 omega = 2*pi*f;
 Zc = 50;
@@ -54,7 +55,7 @@ Zm4 = 282 + j*125;
 absgamma_m4 = abs((Zm4-Zc)/(Zm4+Zc))
 
 %% from RL to R||C
-% clear, clc, close all
+clear, clc, close all
 f = 750e6; % Hz
 omega = 2 * pi * f; % Angular frequency
 
@@ -100,3 +101,30 @@ s = smithplot(gamma1,'Color',[0.2 0 1],'GridType',"Z");
 hold on;
 % s = smithplot(gamma2,'Color','g','LineStyle','-.','LineWidth',1);
 s.Marker = {'+','s'}
+%% Section HI-X, Team A, David, Skyler, William
+clear, clc, clf, close all
+%% R3 = 10 Ohm || C3 = 5 pF
+clear, clc, close all
+c = 3e8;
+f = 740e6;
+lambda = c/f;
+omega = 2*pi*f;
+beta = omega/c;
+Zc = 50;
+R3 = 10;
+C3 = 5e-12;
+G3 = 1/R3;
+Y3 = G3+j*omega*C3;
+Z3 = 1/Y3
+Zm3 = 76 + j*361
+Gamma_m3 = 0.95
+absGamma3 = abs((Z3-Zc)/(Z3+Zc))
+absGamma_m3 = abs((Zm3-Zc)/(Zm3 + Zc))
+RL = 20*log10(Gamma_m3)
+degree1_sc = 154.7; angle1_sc = degree1_sc*pi/180;
+degree2_sc = 78.5*pi/180; angle2_sc = degree2_sc*pi/180;
+Lmin = (pi - angle1_sc) /(2*beta)*1e2 %m->cm
+Lmin_p = Lmin + +lambda*1e2
+Lmax = (pi - angle2_sc) /(2*beta)*1e2 %m->cm
+Lmax_p = Lmax + 3/2*lambda*1e2
+L_estimated = 0.102*lambda*1e2
