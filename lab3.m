@@ -1,7 +1,7 @@
 % 2025-10-16 For different R||C load, calculate ZL values
 %% R1=24 Ohm || C1 = 10 pF
 clear, clc, close all
-f = 750e6;
+f = 760e6;
 omega = 2*pi*f;
 Zc = 50;
 R1 = 24;
@@ -40,7 +40,7 @@ absGamma3 = abs((Z3-Zc)/(Z3+Zc))
 absGamma_m3 = abs((Zm3-Zc)/(Zm3 + Zc))
 RL = 20*log10(Gamma_m3)
 
-%% R4 || C4
+%% R4 = 82 Ohm || C4 = 5 pF
 clear, clc, close all
 f = 750e6;
 omega = 2*pi*f;
@@ -128,3 +128,19 @@ Lmin_p = Lmin + +lambda*1e2
 Lmax = (pi - angle2_sc) /(2*beta)*1e2 %m->cm
 Lmax_p = Lmax + 3/2*lambda*1e2
 L_estimated = 0.102*lambda*1e2
+
+%%
+clear, clc, clf, close all
+c = 3e8;
+f = 760e6;
+lambda = c/f;
+omega = 2*pi*f;
+beta = omega/c;
+degree1_sc = 131.5; angle1_sc = degree1_sc*pi/180;
+degree2_sc = 23.6; angle2_sc = degree2_sc*pi/180;
+Lmin = (pi - angle1_sc) /(2*beta)*1e2 %m->cm
+Lmin_p = Lmin + lambda*1e2
+Lmax = (pi - angle2_sc) /(2*beta)*1e2 %m->cm
+Lmax_p = Lmax + 3/2*lambda*1e2
+L_estimated = 0.102*lambda*1e2
+deltaL = 0.114*lambda*1e2+lambda*1e2
