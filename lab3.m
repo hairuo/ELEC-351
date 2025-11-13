@@ -15,7 +15,7 @@ absGamma_m1 = abs((Zm1-Zc)/(Zm1 + Zc))
 
 %% R2 =  82 Ohm || C2 = 10 pF
 clear, clc, close all
-f = 750e6;
+f = 770e6;
 omega = 2*pi*f;
 Zc = 50;
 R2 = 82;
@@ -23,6 +23,11 @@ C2 = 10e-12;
 G2 = 1/R2;
 Y2 = G2+j*omega*C2;
 Z2 = 1/Y2
+Zm2 = 22+j*112.8;
+Gamma_m2 = (Zm2-Zc)/(Zm2+Zc)
+AbsGamma_m2 = abs(Gamma_m2)
+Gamma2 = (Z2-Zc)/(Z2+Zc)
+AbsGamma2 = abs(Gamma2)
 
 %% R3 = 10 Ohm || C3 = 5 pF
 clear, clc, close all
@@ -132,15 +137,40 @@ L_estimated = 0.102*lambda*1e2
 %%
 clear, clc, clf, close all
 c = 3e8;
-f = 760e6;
+f = 770e6;
 lambda = c/f;
 omega = 2*pi*f;
 beta = omega/c;
-degree1_sc = 131.5; angle1_sc = degree1_sc*pi/180;
-degree2_sc = 23.6; angle2_sc = degree2_sc*pi/180;
+degree1_sc = 109.4; angle1_sc = degree1_sc*pi/180;
+degree2_sc = 6.6; angle2_sc = degree2_sc*pi/180;
 Lmin = (pi - angle1_sc) /(2*beta)*1e2 %m->cm
 Lmin_p = Lmin + lambda*1e2
 Lmax = (pi - angle2_sc) /(2*beta)*1e2 %m->cm
 Lmax_p = Lmax + 3/2*lambda*1e2
 L_estimated = 0.102*lambda*1e2
 deltaL = 0.114*lambda*1e2+lambda*1e2
+%%
+clear, clc, clf, close all
+c = 3e8;
+f = 760e6;
+lambda = c/f;
+omega = 2*pi*f;
+beta = omega/c;
+2*beta*4e-2*180/pi
+20*log10(0.88)
+%% error compare, dB to linear
+clear, clc
+dB1 = -10.173;
+lin1 = 10^(dB1/20)
+dB2 = -9.63;
+lin2 = 10^(dB2/20)
+(lin1-lin2)/lin2
+%% phase of calculated
+clear, clc
+f = 770e6;
+c = 3e8;
+lambda = c/f;
+omega = 2*pi*f;
+beta = omega/c;
+L = [42.5:4:66.5]*1e-2;
+-2*beta*L*180/pi+360*3
