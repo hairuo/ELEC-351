@@ -1,7 +1,7 @@
 % 2025-10-16 For different R||C load, calculate ZL values
 %% R1=24 Ohm || C1 = 10 pF
 clear, clc, close all
-f = 760e6;
+f = 770e6;
 omega = 2*pi*f;
 Zc = 50;
 R1 = 24;
@@ -9,7 +9,8 @@ C1 = 10e-12;
 G1 = 1/R1;
 Y1 = G1+j*omega*C1;
 Z1 = 1/Y1
-Zm1 = 7.12 + j*66.1;
+Zm1 = 11.55 + j*70.56;
+Gamma1 = (Z1-Zc)/(Z1+Zc)
 absGamma1 = abs((Z1-Zc)/(Z1+Zc))
 absGamma_m1 = abs((Zm1-Zc)/(Zm1 + Zc))
 
@@ -31,7 +32,7 @@ AbsGamma2 = abs(Gamma2)
 
 %% R3 = 10 Ohm || C3 = 5 pF
 clear, clc, close all
-f = 754e6;
+f = 760e6;
 Zc = 50;
 omega = 2*pi*f;
 R3 = 10;
@@ -39,7 +40,7 @@ C3 = 5e-12;
 G3 = 1/R3;
 Y3 = G3+j*omega*C3;
 Z3 = 1/Y3
-Zm3 = 76 + j*361
+Zm3 = 1.38 - j*3.7
 Gamma_m3 = 0.95
 absGamma3 = abs((Z3-Zc)/(Z3+Zc))
 absGamma_m3 = abs((Zm3-Zc)/(Zm3 + Zc))
@@ -47,8 +48,10 @@ RL = 20*log10(Gamma_m3)
 
 %% R4 = 82 Ohm || C4 = 5 pF
 clear, clc, close all
-f = 750e6;
+f = 740e6;
 omega = 2*pi*f;
+c=3e8;
+lambda = c/f
 Zc = 50;
 R4 = 82;
 C4 = 5e-12;
@@ -56,7 +59,7 @@ G4 = 1/R4;
 Y4 = G4+j*omega*C4;
 Z4 = 1/Y4
 absgamma4 = abs((Z4-Zc)/(Z4+Zc))
-Zm4 = 282 + j*125;
+Zm4 = 9.4 + j*6.21;
 absgamma_m4 = abs((Zm4-Zc)/(Zm4+Zc))
 
 %% from RL to R||C
@@ -126,8 +129,8 @@ Gamma_m3 = 0.95
 absGamma3 = abs((Z3-Zc)/(Z3+Zc))
 absGamma_m3 = abs((Zm3-Zc)/(Zm3 + Zc))
 RL = 20*log10(Gamma_m3)
-degree1_sc = 154.7; angle1_sc = degree1_sc*pi/180;
-degree2_sc = 78.5*pi/180; angle2_sc = degree2_sc*pi/180;
+degree1_sc = 152.7; angle1_sc = degree1_sc*pi/180;
+degree2_sc = 76.65; angle2_sc = degree2_sc*pi/180;
 Lmin = (pi - angle1_sc) /(2*beta)*1e2 %m->cm
 Lmin_p = Lmin + +lambda*1e2
 Lmax = (pi - angle2_sc) /(2*beta)*1e2 %m->cm
@@ -137,17 +140,18 @@ L_estimated = 0.102*lambda*1e2
 %%
 clear, clc, clf, close all
 c = 3e8;
-f = 770e6;
+f = 760e6;
 lambda = c/f;
 omega = 2*pi*f;
 beta = omega/c;
-degree1_sc = 109.4; angle1_sc = degree1_sc*pi/180;
-degree2_sc = 6.6; angle2_sc = degree2_sc*pi/180;
+% beta = 2*pi/39/1e-2;
+degree1_sc = 97.5; angle1_sc = degree1_sc*pi/180;
+degree2_sc = -12.8; angle2_sc = degree2_sc*pi/180;
 Lmin = (pi - angle1_sc) /(2*beta)*1e2 %m->cm
 Lmin_p = Lmin + lambda*1e2
 Lmax = (pi - angle2_sc) /(2*beta)*1e2 %m->cm
 Lmax_p = Lmax + 3/2*lambda*1e2
-L_estimated = 0.102*lambda*1e2
+L_estimated = 0.099*lambda*1e2
 deltaL = 0.114*lambda*1e2+lambda*1e2
 %%
 clear, clc, clf, close all
@@ -172,5 +176,5 @@ c = 3e8;
 lambda = c/f;
 omega = 2*pi*f;
 beta = omega/c;
-L = [42.5:4:66.5]*1e-2;
--2*beta*L*180/pi+360*3
+L = [42.3:4:67.5]*1e-2;
+phi = -2*beta*L*180/pi+360*2
